@@ -51,6 +51,7 @@ def terms():
     }
     return render_template('terms.html', **context)
 
+
 @app.route('/technical')
 def technical():
     return render_template('technical.html')
