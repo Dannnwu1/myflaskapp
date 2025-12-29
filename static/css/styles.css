@@ -79,6 +79,28 @@
   --bs-highlight-bg: #fff3cd;
 }
 
+
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+
+html {
+    scrollbar-width: none; /* Firefox */
+}
+
+
+body {
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* 确保内容区域不会溢出 */
+.container {
+    max-width: 100%;
+}
+
 *,
 *::before,
 *::after {
@@ -11749,4 +11771,36 @@ html {
     width: 1.5vw;
     left: -2vw;
   }
+}
+
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem !important;
+    }
+
+    pre, code {
+        font-size: 0.8rem !important;
+    }
+
+    .display-6 {
+        font-size: 1.75rem;
+    }
+
+    .h5 {
+        font-size: 1.1rem;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 576px) {
+    .container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+    .btn {
+        width: 100%;
+    }
 }

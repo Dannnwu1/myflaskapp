@@ -4,57 +4,67 @@
 
 {% block content %}
 <!-- Technical Guide Section -->
-<section class="bg-light py-5">
-    <div class="container px-5">
-        <div class="row gx-5 justify-content-center">
-            <div class="col-lg-10 col-xl-8">
-                <div class="my-5 text-start">
-                    <h2 class="display-5 fw-bolder mb-4">
+<section class="bg-light py-4 py-md-5">
+    <div class="container px-3 px-md-4 px-lg-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+                <div class="my-4 my-md-5">
+                    <h2 class="display-6 display-md-5 fw-bolder mb-4 text-center text-md-start">
                         <span class="text-gradient d-inline">Deploy Flask App on PythonAnywhere</span>
                     </h2>
 
-                    <div class="card shadow-lg border-0 mb-5">
-                        <div class="card-body p-5 text-start">
+                    <div class="card shadow-lg border-0 mb-4 mb-md-5">
+                        <div class="card-body p-3 p-md-4 p-lg-5">
                             <!-- Step 1 -->
-                            <div class="mb-5">
-                                <h3 class="h4 fw-bold text-primary mb-3">
+                            <div class="mb-4 mb-md-5">
+                                <h3 class="h5 h4-md fw-bold text-primary mb-3">
                                     <i class="bi bi-1-circle me-2"></i>Step 1: Sign Up for PythonAnywhere
                                 </h3>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2">
-                                        <i class="bi bi-arrow-right text-success me-2"></i>
-                                        Go to <a href="https://pythonanywhere.com" target="_blank" class="text-decoration-none">pythonanywhere.com</a>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <i class="bi bi-arrow-right text-success me-2 mt-1 flex-shrink-0"></i>
+                                        <span>Go to <a href="https://pythonanywhere.com" target="_blank" class="text-decoration-none text-break">pythonanywhere.com</a></span>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-arrow-right text-success me-2"></i>
-                                        Create a free account (Beginner account available)
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <i class="bi bi-arrow-right text-success me-2 mt-1 flex-shrink-0"></i>
+                                        <span>Create a free account (Beginner account available)</span>
                                     </li>
-                                    <li>
-                                        <i class="bi bi-arrow-right text-success me-2"></i>
-                                        Verify your email
+                                    <li class="d-flex align-items-start">
+                                        <i class="bi bi-arrow-right text-success me-2 mt-1 flex-shrink-0"></i>
+                                        <span>Verify your email</span>
                                     </li>
                                 </ul>
                             </div>
 
                             <!-- Step 2 -->
-                            <div class="mb-5">
-                                <h3 class="h4 fw-bold text-primary mb-3">
+                            <div class="mb-4 mb-md-5">
+                                <h3 class="h5 h4-md fw-bold text-primary mb-3">
                                     <i class="bi bi-2-circle me-2"></i>Step 2: Prepare Your Flask Application
                                 </h3>
                                 <p class="text-muted mb-3">Create a basic Flask app structure locally:</p>
 
-                                <div class="bg-dark text-light rounded-3 p-4 mb-3">
-                                    <h5 class="text-warning mb-3">Project Structure:</h5>
-                                    <pre class="mb-0"><code class="text-light">myflaskapp/
+                                <div class="card border-dark mb-3">
+                                    <div class="card-header bg-dark text-warning py-2">
+                                        <h6 class="mb-0">Project Structure:</h6>
+                                    </div>
+                                    <div class="card-body bg-dark p-3">
+                                        <div class="overflow-auto">
+                                            <pre class="mb-0 text-light" style="font-size: 0.875rem;"><code>myflaskapp/
 ├── app.py
 ├── requirements.txt
 ├── static/
 └── templates/</code></pre>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="bg-dark text-light rounded-3 p-4 mb-3">
-                                    <h5 class="text-warning mb-3">app.py:</h5>
-                                    <pre><code class="text-light">from flask import Flask, render_template
+                                <div class="card border-dark mb-3">
+                                    <div class="card-header bg-dark text-warning py-2">
+                                        <h6 class="mb-0">app.py:</h6>
+                                    </div>
+                                    <div class="card-body bg-dark p-3">
+                                        <div class="overflow-auto">
+                                            <pre class="mb-0 text-light" style="font-size: 0.875rem;"><code>from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -68,16 +78,28 @@ def about():
 
 if __name__ == '__main__':
     app.run(debug=True)</code></pre>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="bg-dark text-light rounded-3 p-4 mb-3">
-                                    <h5 class="text-warning mb-3">requirements.txt:</h5>
-                                    <pre><code class="text-light">Flask==2.3.3</code></pre>
+                                <div class="card border-dark mb-3">
+                                    <div class="card-header bg-dark text-warning py-2">
+                                        <h6 class="mb-0">requirements.txt:</h6>
+                                    </div>
+                                    <div class="card-body bg-dark p-3">
+                                        <div class="overflow-auto">
+                                            <pre class="mb-0 text-light" style="font-size: 0.875rem;"><code>Flask==2.3.3</code></pre>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="bg-dark text-light rounded-3 p-4">
-                                    <h5 class="text-warning mb-3">templates/index.html:</h5>
-                                    <pre><code class="text-light">&lt;!DOCTYPE html&gt;
+                                <div class="card border-dark">
+                                    <div class="card-header bg-dark text-warning py-2">
+                                        <h6 class="mb-0">templates/index.html:</h6>
+                                    </div>
+                                    <div class="card-body bg-dark p-3">
+                                        <div class="overflow-auto">
+                                            <pre class="mb-0 text-light" style="font-size: 0.875rem;"><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;{{ title }}&lt;/title&gt;
@@ -87,22 +109,26 @@ if __name__ == '__main__':
     &lt;p&gt;Deployed on PythonAnywhere&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Step 3 -->
-                            <div class="mb-5">
-                                <h3 class="h4 fw-bold text-primary mb-3">
+                            <div class="mb-4 mb-md-5">
+                                <h3 class="h5 h4-md fw-bold text-primary mb-3">
                                     <i class="bi bi-3-circle me-2"></i>Step 3: Upload Your Code
                                 </h3>
                                 <div class="alert alert-info">
-                                    <h5 class="alert-heading">Using Git (Recommended):</h5>
-                                    <ol class="mb-0">
-                                        <li class="mb-2">Push your code to GitHub/GitLab</li>
-                                        <li class="mb-2">In PythonAnywhere dashboard, open a Bash console</li>
+                                    <h6 class="alert-heading mb-2">Using Git (Recommended):</h6>
+                                    <ol class="mb-0 ps-3">
+                                        <li class="mb-1">Push your code to GitHub/GitLab</li>
+                                        <li class="mb-1">In PythonAnywhere dashboard, open a Bash console</li>
                                         <li>Clone your repository:
-                                            <div class="bg-dark text-light rounded-3 p-3 mt-2">
-                                                <code class="text-light">git clone https://github.com/yourusername/your-repo.git</code>
+                                            <div class="card bg-dark border-secondary mt-2">
+                                                <div class="card-body p-2">
+                                                    <code class="text-light text-break" style="font-size: 0.85rem;">git clone https://github.com/yourusername/your-repo.git</code>
+                                                </div>
                                             </div>
                                         </li>
                                     </ol>
@@ -110,12 +136,17 @@ if __name__ == '__main__':
                             </div>
 
                             <!-- Step 4 -->
-                            <div class="mb-5">
-                                <h3 class="h4 fw-bold text-primary mb-3">
+                            <div class="mb-4 mb-md-5">
+                                <h3 class="h5 h4-md fw-bold text-primary mb-3">
                                     <i class="bi bi-4-circle me-2"></i>Step 4: Set Up Virtual Environment
                                 </h3>
-                                <div class="bg-dark text-light rounded-3 p-4">
-                                    <pre><code class="text-light"># Open a Bash console
+                                <div class="card border-dark">
+                                    <div class="card-header bg-dark text-warning py-2">
+                                        <h6 class="mb-0">Bash Commands:</h6>
+                                    </div>
+                                    <div class="card-body bg-dark p-3">
+                                        <div class="overflow-auto">
+                                            <pre class="mb-0 text-light" style="font-size: 0.875rem;"><code># Open a Bash console
 # Navigate to your app directory:
 cd ~/your-flask-app
 
@@ -127,48 +158,55 @@ source myenv/bin/activate
 
 # Install requirements:
 pip install -r requirements.txt</code></pre>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Step 5 -->
-                            <div class="mb-5">
-                                <h3 class="h4 fw-bold text-primary mb-3">
+                            <div class="mb-4 mb-md-5">
+                                <h3 class="h5 h4-md fw-bold text-primary mb-3">
                                     <i class="bi bi-5-circle me-2"></i>Step 5: Configure the Web App
                                 </h3>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2">
-                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        Go to <strong>Web</strong> tab in dashboard
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                                        <span>Go to <strong>Web</strong> tab in dashboard</span>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        Click <span class="badge bg-primary">"Add a new web app"</span>
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                                        <span>Click <span class="badge bg-primary">"Add a new web app"</span></span>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        Select <span class="badge bg-warning text-dark">"Manual configuration"</span> (not "Flask")
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                                        <span>Select <span class="badge bg-warning text-dark">"Manual configuration"</span> (not "Flask")</span>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        Choose Python version
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                                        <span>Choose Python version</span>
                                     </li>
-                                    <li>
-                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                        Click Next
+                                    <li class="d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                                        <span>Click Next</span>
                                     </li>
                                 </ul>
                             </div>
 
                             <!-- Step 6 -->
-                            <div class="mb-5">
-                                <h3 class="h4 fw-bold text-primary mb-3">
+                            <div class="mb-4 mb-md-5">
+                                <h3 class="h5 h4-md fw-bold text-primary mb-3">
                                     <i class="bi bi-6-circle me-2"></i>Step 6: Configure WSGI File
                                 </h3>
-                                <div class="alert alert-warning">
+                                <div class="alert alert-warning mb-3">
                                     Click on the <strong>WSGI configuration file link</strong> (will open in editor)
                                 </div>
-                                <div class="bg-dark text-light rounded-3 p-4">
-                                    <pre><code class="text-light">import sys
+                                <div class="card border-dark">
+                                    <div class="card-header bg-dark text-warning py-2">
+                                        <h6 class="mb-0">WSGI Configuration:</h6>
+                                    </div>
+                                    <div class="card-body bg-dark p-3">
+                                        <div class="overflow-auto">
+                                            <pre class="mb-0 text-light" style="font-size: 0.875rem;"><code>import sys
 import os
 
 # Add your app's directory to the Python path
@@ -178,43 +216,50 @@ if path not in sys.path:
 
 # Import your Flask app
 from app import app as application</code></pre>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Step 7 -->
-                            <div class="mb-5">
-                                <h3 class="h4 fw-bold text-primary mb-3">
+                            <div class="mb-4 mb-md-5">
+                                <h3 class="h5 h4-md fw-bold text-primary mb-3">
                                     <i class="bi bi-7-circle me-2"></i>Step 7: Configure Web App Settings
                                 </h3>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
                                         <div class="card h-100 border-primary">
                                             <div class="card-body">
-                                                <h5 class="card-title text-primary">Web Tab Configuration:</h5>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">
-                                                        <strong>Source code:</strong> Set to your app directory
+                                                <h6 class="card-title text-primary fw-bold">Web Tab Configuration:</h6>
+                                                <ul class="list-group list-group-flush small">
+                                                    <li class="list-group-item px-0 py-2">
+                                                        <strong>Source code:</strong><br>
+                                                        <small>Set to your app directory</small>
                                                     </li>
-                                                    <li class="list-group-item">
-                                                        <strong>Working directory:</strong> Set to your app directory
+                                                    <li class="list-group-item px-0 py-2">
+                                                        <strong>Working directory:</strong><br>
+                                                        <small>Set to your app directory</small>
                                                     </li>
-                                                    <li class="list-group-item">
-                                                        <strong>Virtualenv:</strong> Set to <code>/home/yourusername/your-flask-app/myenv</code>
+                                                    <li class="list-group-item px-0 py-2">
+                                                        <strong>Virtualenv:</strong><br>
+                                                        <small class="text-break">/home/yourusername/your-flask-app/myenv</small>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-12 col-md-6">
                                         <div class="card h-100 border-primary">
                                             <div class="card-body">
-                                                <h5 class="card-title text-primary">Static Files:</h5>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">
-                                                        <strong>URL:</strong> <code>/static/</code>
+                                                <h6 class="card-title text-primary fw-bold">Static Files:</h6>
+                                                <ul class="list-group list-group-flush small">
+                                                    <li class="list-group-item px-0 py-2">
+                                                        <strong>URL:</strong><br>
+                                                        <code>/static/</code>
                                                     </li>
-                                                    <li class="list-group-item">
-                                                        <strong>Directory:</strong> <code>/home/yourusername/your-flask-app/static/</code>
+                                                    <li class="list-group-item px-0 py-2">
+                                                        <strong>Directory:</strong><br>
+                                                        <small class="text-break">/home/yourusername/your-flask-app/static/</small>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -225,32 +270,35 @@ from app import app as application</code></pre>
 
                             <!-- Step 8 -->
                             <div class="mb-4">
-                                <h3 class="h4 fw-bold text-primary mb-3">
+                                <h3 class="h5 h4-md fw-bold text-primary mb-3">
                                     <i class="bi bi-8-circle me-2"></i>Step 8: Deploy
                                 </h3>
                                 <div class="alert alert-success">
-                                    <div class="d-flex align-items-center">
-                                        <i class="bi bi-check-circle-fill fs-3 me-3"></i>
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill fs-4 me-3 flex-shrink-0 mt-1"></i>
                                         <div>
-                                            <h5 class="alert-heading">Final Steps:</h5>
-                                            <ol class="mb-0">
-                                                <li>Go back to <strong>Web</strong> tab</li>
-                                                <li>Click the big green <button class="btn btn-success btn-sm" disabled>Reload</button> button</li>
-                                                <li>Visit your app at: <strong>yourusername.pythonanywhere.com</strong></li>
+                                            <h6 class="alert-heading mb-2">Final Steps:</h6>
+                                            <ol class="mb-0 ps-3">
+                                                <li class="mb-1">Go back to <strong>Web</strong> tab</li>
+                                                <li class="mb-1">Click the green <span class="badge bg-success">Reload</span> button</li>
+                                                <li>Visit your app at: <strong class="text-break">yourusername.pythonanywhere.com</strong></li>
                                             </ol>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="mt-5 pt-4 border-top">
-                                <div class="d-flex justify-content-start gap-3">
-
-                                    <a href="https://www.pythonanywhere.com/user/DanielllWu/consoles/44225581/" class="btn btn-primary btn-lg px-4">
-                                        <i class="bi bi-terminal"></i> Python Anywhere Console
+                            <div class="mt-4 mt-md-5 pt-3 pt-md-4 border-top">
+                                <div class="d-flex flex-column flex-md-row gap-3">
+                                    <a href="https://www.pythonanywhere.com/user/DanielllWu/consoles/44225581/"
+                                       class="btn btn-primary px-4 py-2 text-center"
+                                       target="_blank">
+                                        <i class="bi bi-terminal me-2"></i>PythonAnywhere Console
                                     </a>
-                                    <a href="https://www.pythonanywhere.com/user/DanielllWu/webapps/#tab_id_danielllwu_pythonanywhere_com" class="btn btn-outline-secondary btn-lg px-4">
-                                        <i class="bi bi-terminal-plus"></i> Python Anywhere Web
+                                    <a href="https://www.pythonanywhere.com/user/DanielllWu/webapps/#tab_id_danielllwu_pythonanywhere_com"
+                                       class="btn btn-outline-secondary px-4 py-2 text-center"
+                                       target="_blank">
+                                        <i class="bi bi-terminal-plus me-2"></i>PythonAnywhere Web
                                     </a>
                                 </div>
                             </div>
@@ -261,4 +309,6 @@ from app import app as application</code></pre>
         </div>
     </div>
 </section>
+
+
 {% endblock %}
