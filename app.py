@@ -1,61 +1,33 @@
-from datetime import datetime
-
-from flask import Flask, render_template, url_for
-
-app = Flask(__name__)
-
-
-@app.route('/')
-@app.route('/index')
-def index():
-    return render_template('index.html')
+# app.py
+from flask import Flask, render_template
+from blueprints.auth.routes import auth_bp
+from blueprints.blog.routes import blog_bp
+from blueprints.admin.routes import admin_bp
+from blueprints.views.routes import views_bp
+import config
 
 
-@app.route('/projects')
-def projects():
-    return render_template('projects.html')
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(config.Config)
+
+    # Register blueprints
+    # app.register_blueprint(auth_bp, url_prefix='/auth')
+    # app.register_blueprint(blog_bp, url_prefix='/admin')
+    # app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(views_bp, url_prefix='/views')
+
+    # Root route
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+
+    return app
 
 
-@app.route('/resume')
-def resume():
-    return render_template('resume.html')
-
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
-
-@app.route("/privacy")
-def privacy():
-    context = {
-        'site_name': 'Dan\'s App',
-        'company_name': 'Dan one person limited company',
-        'contact_email': 'privacy@yourapp.com',
-        'company_address': '123 Tech Street, San Francisco, CA 94107',
-        'last_updated': datetime.now().strftime('%Y-%m-%d'),
-        'current_year': datetime.now().year,
-    }
-    return render_template('privacy.html', **context)
-
-
-@app.route('/terms')
-def terms():
-    context = {
-        'site_name': 'Dan\'s App',
-        'company_name': 'Dan one person limited company',
-        'contact_email': 'privacy@yourapp.com',
-        'company_address': '123 Tech Street, San Francisco, CA 94107',
-        'last_updated': datetime.now().strftime('%Y-%m-%d'),
-        'current_year': datetime.now().year,
-    }
-    return render_template('terms.html', **context)
-
-
-@app.route('/technical')
-def technical():
-    return render_template('technical.html')
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    try:
+        app = create_app()
+        app.run(debug=True)
+    except Exception as e:
+        print(e)

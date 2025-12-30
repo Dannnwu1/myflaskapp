@@ -32,10 +32,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
                     <li class="nav-item"><a class="nav-link" href="{{url_for('index')}}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url_for('technical')}}">Tech</a></li>
-<!--                    <li class="nav-item"><a class="nav-link" href="{{url_for('resume')}}">Resume</a></li>-->
-<!--                    <li class="nav-item"><a class="nav-link" href="{{url_for('projects')}}">Projects</a></li>-->
-<!--                    <li class="nav-item"><a class="nav-link" href="{{url_for('contact')}}">Contact</a></li>-->
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('views.technical')}}">Tech</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('views.resume')}}">Resume</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('views.projects')}}">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('views.contact')}}">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -53,10 +53,10 @@
                 <div class="small m-0">Copyright &copy; Dani's Website 2025</div>
             </div>
             <div class="col-auto">
-<!--                <a class="small" href="{{url_for('privacy')}}">Privacy</a>-->
-<!--                <span class="mx-1">&middot;</span>-->
-<!--                <a class="small" href="{{url_for('terms')}}">Terms</a>-->
-<!--                <span class="mx-1">&middot;</span>-->
+                <a class="small" href="{{url_for('views.privacy')}}">Privacy</a>
+                <span class="mx-1">&middot;</span>
+                <a class="small" href="{{url_for('views.terms')}}">Terms</a>
+                <span class="mx-1">&middot;</span>
                 <a class="small" href="mailto:hang1989best@163.com">Contact</a>
             </div>
         </div>

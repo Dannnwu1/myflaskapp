@@ -1,0 +1,1 @@
+export SECRET_KEY='your-super-secret-key-here-123456'
