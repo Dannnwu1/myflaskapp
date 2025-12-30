@@ -26,8 +26,5 @@ def create_app():
 
 
 if __name__ == '__main__':
-    try:
-        app = create_app()
-        app.run(debug=True)
-    except Exception as e:
-        print(e)
+    app = create_app()
+    app.run(debug=True)
