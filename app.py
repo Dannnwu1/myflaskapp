@@ -1,6 +1,6 @@
 # app.py
 from flask import Flask, render_template
-
+from flask_cors import CORS
 import config
 from blueprints.api.routes import api_bp
 from blueprints.photo.models import db, import_csv_with_pandas
@@ -10,6 +10,7 @@ from blueprints.photo.routes import photo_bp
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(config.Config)
 
     # Register blueprints
