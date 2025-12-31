@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     clearGallery();
 
     try{
-    const response = await fetch('http://127.0.0.1:5000/api/');
+    const response = await fetch('https://danielllwu.pythonanywhere.com/api/');
 
 
     if(!response.ok){
