@@ -19,7 +19,7 @@ def photos():
             'description': photo.description,
             'created_at': photo.created_at,
             'name': photo.name,
-            'url':photo.url,
+            'url': photo.url,
         }
         for photo in photos
     ]
@@ -29,5 +29,5 @@ def photos():
 
 @photo_bp.route('/gallery')
 def gallery():
-
-    return render_template('gallery.html')
+    photos = Photo.query.all()
+    return render_template('gallery.html',photos=photos)

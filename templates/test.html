@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>照片画廊 | 网格布局</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #7f8c8d;
+            --accent-color: #3498db;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --border-color: #e9ecef;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            color: var(--dark-gray);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        /* 画廊容器 */
+        .gallery-container {
+            padding: 2rem 0;
+        }
+
+        /* 网格布局 */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 0;
+        }
+
+        /* 照片卡片 */
+        .photo-card {
+            position: relative;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 图片容器 */
+        .photo-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 75%; /* 4:3 宽高比 */
+            overflow: hidden;
+        }
+
+        .photo-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-card:hover .photo-image {
+            transform: scale(1.05);
+        }
+
+        /* 图片覆盖层 */
+        .photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .photo-card:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .overlay-content {
+            color: white;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover .overlay-content {
+            transform: translateY(0);
+        }
+
+        .overlay-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .overlay-meta {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* 卡片内容 */
+        .card-body {
+            padding: 1.25rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .photo-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .photo-description {
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .photo-meta {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .photo-date {
+            font-size: 0.85rem;
+            color: var(--secondary-color);
+        }
+
+        .photo-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray);
+            border: none;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* 加载状态 */
+        .loading-placeholder {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* 空状态 */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            color: var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state-text {
+            color: var(--secondary-color);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+
+            .gallery-container {
+                padding: 1rem 0;
+            }
+
+            .card-body {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 页眉样式 */
+        .gallery-header {
+            background: var(--light-gray);
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 过滤器 */
+        .filter-container {
+            padding: 1.5rem 0;
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: 20px;
+            color: var(--secondary-color);
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* 页脚 */
+        .gallery-footer {
+            background: var(--light-gray);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 页眉 -->
+    <header class="gallery-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="header-title">照片画廊</h1>
+                    <p class="header-subtitle">精选作品展示 | 网格布局</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 过滤器 -->
+    <div class="filter-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterPhotos('all')">全部</button>
+                        <button class="filter-btn" onclick="filterPhotos('nature')">自然</button>
+                        <button class="filter-btn" onclick="filterPhotos('portrait')">人像</button>
+                        <button class="filter-btn" onclick="filterPhotos('urban')">城市</button>
+                        <button class="filter-btn" onclick="filterPhotos('travel')">旅行</button>
+                        <button class="filter-btn" onclick="filterPhotos('abstract')">抽象</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 画廊容器 -->
+    <section class="gallery-container">
+        <div class="container">
+            <!-- 照片网格 -->
+            <div id="photoGrid" class="photo-grid">
+                <!-- 照片将通过JavaScript动态加载 -->
+            </div>
+
+            <!-- 空状态 -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">📷</div>
+                <h3 class="empty-state-title">暂无照片</h3>
+                <p class="empty-state-text">当前分类下没有照片，请选择其他分类或稍后再试。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="gallery-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="footer-text">© 2024 照片画廊 | 网格布局展示</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 图片查看器模态框 -->
+    <div class="modal fade" id="imageViewerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">照片详情</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="" class="img-fluid rounded">
+                    <div class="mt-3">
+                        <h5 id="modalImageTitle" class="mb-2"></h5>
+                        <p id="modalImageDescription" class="text-muted"></p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small class="text-muted" id="modalImageDate"></small>
+                            <button class="btn btn-outline-primary btn-sm" onclick="downloadImage()">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script>
+        // 示例照片数据
+        const samplePhotos = [
+            {
+                id: 1,
+                name: "山间日出",
+                description: "清晨的第一缕阳光洒在山间，万物复苏的景象。",
+                url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                category: "nature",
+                date: "2023-10-15",
+                featured: true
+            },
+            {
+                id: 2,
+                name: "城市夜景",
+                description: "夜幕降临，城市灯光璀璨，展现现代都市的繁华。",
+                url: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                category: "urban",
+                date: "2023-09-22",
+                featured: true
+            },
+            {
+                id: 3,
+                name: "海边日落",
+                description: "夕阳西下，海天一色，金色的光芒洒满海面。",
+                url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                category: "nature",
+                date: "2023-08-30",
+                featured: false
+            },
+            {
+                id: 4,
+                name: "人像摄影",
+                description: "自然光下的人像拍摄，展现人物的真实情感。",
+                url: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                category: "portrait",
+                date: "2023-10-05",
+                featured: true
+            },
+            {
+                id: 5,
+                name: "街头艺术",
+                description: "城市街道上的涂鸦艺术，展现城市的创意与活力。",
+                url: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                category: "urban",
+                date: "2023-09-10",
+                featured: false
+            },
+            {
+                id: 6,
+                name: "森林小径",
+                description: "蜿蜒穿过茂密森林的小径，宁静而神秘。",
+                url: "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                category: "nature",
+                date: "2023-07-18",
+                featured: false
+            },
+            {
+                id: 7,
+                name: "旅行记忆",
+                description: "探索未知之地的美好回忆，记录旅途中的点滴。",
+                url: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                category: "travel",
+                date: "2023-06-25",
+                featured: true
+            },
+            {
+                id: 8,
+                name: "抽象艺术",
+                description: "色彩与形状的组合，创造视觉上的冲击与想象。",
+                url: "https://images.unsplash.com/photo-1543857778-c4a1a569e358?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                category: "abstract",
+                date: "2023-10-01",
+                featured: false
+            }
+        ];
+
+        // 当前过滤器
+        let currentFilter = 'all';
+        let allPhotos = [...samplePhotos];
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            displayPhotos(allPhotos);
+            setupEventListeners();
+        });
+
+        // 显示照片
+        function displayPhotos(photos) {
+            const grid = document.getElementById('photoGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            if (photos.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+
+            const photosHTML = photos.map(photo => `
+                <div class="photo-card" data-category="${photo.category}" data-id="${photo.id}">
+                    <div class="photo-image-container">
+                        <img src="${photo.url}"
+                             alt="${photo.name}"
+                             class="photo-image"
+                             loading="lazy"
+                             onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
+                        <div class="photo-overlay">
+                            <div class="overlay-content">
+                                <h4 class="overlay-title">${photo.name}</h4>
+                                <p class="overlay-meta">${formatDate(photo.date)}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="photo-title">${photo.name}</h5>
+                        <p class="photo-description">${photo.description}</p>
+                        <div class="photo-meta">
+                            <span class="photo-date">${formatDate(photo.date)}</span>
+                            <div class="photo-actions">
+                                <button class="btn-icon" onclick="viewPhoto(${photo.id})" title="查看大图">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                                <button class="btn-icon" onclick="likePhoto(${photo.id})" title="喜欢">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            grid.innerHTML = photosHTML;
+        }
+
+        // 过滤照片
+        function filterPhotos(category) {
+            currentFilter = category;
+
+            // 更新按钮状态
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            let filteredPhotos;
+            if (category === 'all') {
+                filteredPhotos = allPhotos;
+            } else {
+                filteredPhotos = allPhotos.filter(photo => photo.category === category);
+            }
+
+            displayPhotos(filteredPhotos);
+        }
+
+        // 查看照片详情
+        function viewPhoto(photoId) {
+            const photo = allPhotos.find(p => p.id === photoId);
+            if (!photo) return;
+
+            const modal = new bootstrap.Modal(document.getElementById('imageViewerModal'));
+            document.getElementById('modalImage').src = photo.url;
+            document.getElementById('modalImage').alt = photo.name;
+            document.getElementById('modalTitle').textContent = photo.name;
+            document.getElementById('modalImageTitle').textContent = photo.name;
+            document.getElementById('modalImageDescription').textContent = photo.description;
+            document.getElementById('modalImageDate').textContent = `上传日期: ${formatDate(photo.date)}`;
+
+            modal.show();
+        }
+
+        // 喜欢照片
+        function likePhoto(photoId) {
+            const photo = allPhotos.find(p => p.id === photoId);
+            if (!photo) return;
+
+            const likeBtn = event.currentTarget.querySelector('i');
+            if (likeBtn.classList.contains('far')) {
+                likeBtn.classList.remove('far');
+                likeBtn.classList.add('fas');
+                likeBtn.style.color = '#e74c3c';
+                alert(`已喜欢照片: ${photo.name}`);
+            } else {
+                likeBtn.classList.remove('fas');
+                likeBtn.classList.add('far');
+                likeBtn.style.color = '';
+                alert(`已取消喜欢照片: ${photo.name}`);
+            }
+        }
+
+        // 下载图片
+        function downloadImage() {
+            const imageUrl = document.getElementById('modalImage').src;
+            const imageName = document.getElementById('modalImageTitle').textContent;
+
+            fetch(imageUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${imageName}.jpg`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                })
+                .catch(error => {
+                    console.error('下载失败:', error);
+                    alert('下载失败，请稍后重试');
+                });
+        }
+
+        // 格式化日期
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 搜索功能（示例）
+            const searchInput = document.createElement('input');
+            searchInput.type = 'text';
+            searchInput.placeholder = '搜索照片...';
+            searchInput.className = 'form-control mb-3';
+            searchInput.style.maxWidth = '300px';
+            searchInput.style.margin = '0 auto';
+
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                if (searchTerm.trim() === '') {
+                    displayPhotos(currentFilter === 'all' ? allPhotos :
+                        allPhotos.filter(p => p.category === currentFilter));
+                    return;
+                }
+
+                const filtered = allPhotos.filter(photo =>
+                    photo.name.toLowerCase().includes(searchTerm) ||
+                    photo.description.toLowerCase().includes(searchTerm)
+                );
+
+                displayPhotos(filtered);
+            });
+
+            // 将搜索框添加到页眉
+            const header = document.querySelector('.gallery-header .container .row');
+            const searchCol = document.createElement('div');
+            searchCol.className = 'col-12 text-center mt-3';
+            searchCol.appendChild(searchInput);
+            header.appendChild(searchCol);
+        }
+    </script>
+</body>
+</html>
