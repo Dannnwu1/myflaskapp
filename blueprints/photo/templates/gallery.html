@@ -17,9 +17,11 @@
             <!-- 照片网格 -->
             <div id="photoGrid" class="photo-grid">
                 {%for photo in photos%}
+{% set base_path = 'assets/photos/2025/12 Dec/' %}
+{% set image_url = url_for('static', filename=base_path ~ photo.filename) %}
                 <div class="photo-card"  data-id={{photo.id}}>
                     <div class="photo-image-container">
-                        <img src="{{ photo.url }}" alt="{{photo.description}}" class="photo-image" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
+                        <img src="{{ image_url }}" alt="{{photo.description}}" class="photo-image" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
                         <div class="photo-overlay">
                             <div class="overlay-content">
                                 <h4 class="overlay-title">{{photo.name}}</h4>
