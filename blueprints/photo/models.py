@@ -14,16 +14,17 @@ class Photo(db.Model):
     description = db.Column(db.String(200))
     filename = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    url = db.Column(db.String(200))
 
 
 def import_csv_with_pandas():
     # Read CSV
-    df = pd.read_csv('test/photos.csv', encoding='gb18030')
+    df = pd.read_csv('csv/photos.csv', encoding='gb18030')
 
     # If table exists, append to it
-    df.to_sql('photo', db.engine, if_exists='append', index=False)
+    # df.to_sql('photo', db.engine, if_exists='append', index=False)
 
     # Or if you want to replace the table
-    # df.to_sql('users', db.engine, if_exists='replace', index=False)
+    df.to_sql('photo', db.engine, if_exists='replace', index=False)
 
     print(f"Imported {len(df)} records")

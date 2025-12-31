@@ -17,9 +17,9 @@ def create_app():
     app.register_blueprint(photo_bp, url_prefix='/photo')
     db.init_app(app)
 
-    # with app.app_context():
-    #     import_csv_with_pandas()
-    #     print("table created")
+    with app.app_context():
+        import_csv_with_pandas()
+        print("table created")
 
     # Root route
     @app.route('/')
@@ -33,4 +33,4 @@ app = create_app()
 
 if __name__ == '__main__':
     # app = create_app()
-    app.run(debug=False)
+    app.run(debug=True)
