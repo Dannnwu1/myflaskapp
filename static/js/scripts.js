@@ -71,6 +71,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     function clearGallery(){
     gallery.innerHTML='';}
+
+    console.log('ok')
 })
 
 
