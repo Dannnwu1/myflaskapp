@@ -1,5 +1,4 @@
-from flask import Blueprint, jsonify, render_template
-from blueprints.photo.models import Photo
+from flask import Blueprint, render_template
 
 photo_bp = Blueprint(
     'photo',
@@ -9,25 +8,7 @@ photo_bp = Blueprint(
 )
 
 
-@photo_bp.route('/')
-def photos():
-    photos = Photo.query.all()
-    photos_list = [
-        {
-            'id': photo.id,
-            'file_name': photo.filename,
-            'description': photo.description,
-            'created_at': photo.created_at,
-            'name': photo.name,
-            'url': photo.url,
-        }
-        for photo in photos
-    ]
-
-    return jsonify(photos_list)
-
-
 @photo_bp.route('/gallery')
 def gallery():
-    photos = Photo.query.all()
-    return render_template('gallery.html',photos=photos)
+    return render_template('gallery.html')
+

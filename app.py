@@ -2,6 +2,7 @@
 from flask import Flask, render_template
 
 import config
+from blueprints.api.routes import api_bp
 from blueprints.photo.models import db, import_csv_with_pandas
 from blueprints.views.routes import views_bp
 from blueprints.photo.routes import photo_bp
@@ -15,6 +16,7 @@ def create_app():
 
     app.register_blueprint(views_bp, url_prefix='/')
     app.register_blueprint(photo_bp, url_prefix='/photo')
+    app.register_blueprint(api_bp, url_prefix='/api')
     db.init_app(app)
 
     # with app.app_context():
@@ -33,4 +35,4 @@ app = create_app()
 
 if __name__ == '__main__':
     # app = create_app()
-    app.run(debug=False)
+    app.run(debug=True)

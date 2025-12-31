@@ -11813,81 +11813,138 @@ html {
     }
 }
 
-        .card-body {
-            padding: 1.25rem;
-            flex-grow: 1;
+#gallery {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Photo Card Styling */
+.photo-card {
+    background-color: white;
+    border-radius: 12px; /* Border radius */
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.photo-img {
+    width: 100%;
+    height: 800px;
+    object-fit: cover;
+    display: block;
+}
+
+.photo-info {
+    padding: 15px;
+}
+
+.photo-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.photo-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    #gallery {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    #gallery {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 15px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    #gallery {
+        grid-template-columns: 1fr;
+    }
+}
+
+        /* Sorting Controls */
+        .sorting-controls {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px 20px 20px;
+        }
+
+        .sort-buttons {
             display: flex;
-            flex-direction: column;
-        }
-
-        .photo-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-
-        .photo-description {
-            font-size: 0.95rem;
-            color: var(--secondary-color);
-            line-height: 1.5;
-            flex-grow: 1;
-        }
-
-        .photo-meta {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .photo-date {
-            font-size: 0.85rem;
-            color: var(--secondary-color);
-        }
-
-        .photo-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
             justify-content: center;
-            background: var(--light-gray);
-            border: none;
-            color: var(--secondary-color);
-            transition: var(--transition);
         }
 
-        .btn-icon:hover {
-            background: var(--accent-color);
+        .sort-btn {
+            padding: 8px 16px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .sort-btn:hover {
+            background-color: #e9ecef;
+        }
+
+        .sort-btn.active {
+            background-color: #0d6efd;
             color: white;
+            border-color: #0d6efd;
         }
 
-                .photo-image-container {
-            position: relative;
-            width: 100%;
-            padding-top: 75%; /* 4:3 宽高比 */
-            overflow: hidden;
+        .sort-btn i {
+            margin-right: 5px;
         }
 
-        .photo-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            #gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
-        .photo-card:hover .photo-image {
-            transform: scale(1.05);
+        @media (max-width: 768px) {
+            #gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .sort-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sort-btn {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            #gallery {
+                grid-template-columns: 1fr;
+            }
         }
