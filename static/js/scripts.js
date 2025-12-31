@@ -74,37 +74,37 @@ document.addEventListener('DOMContentLoaded',()=>{
 })
 
 
-    function sortPhotos(sortBy) {
-        let sortedPhotos = [...originalPhotos];
-
-        switch(sortBy) {
-            case 'description-asc':
-                sortedPhotos.sort((a, b) => a.description.localeCompare(b.description));
-                break;
-            case 'description-desc':
-                sortedPhotos.sort((a, b) => b.description.localeCompare(a.description));
-                break;
-            case 'title-asc':
-                sortedPhotos.sort((a, b) => a.title.localeCompare(b.title));
-                break;
-            case 'title-desc':
-                sortedPhotos.sort((a, b) => b.title.localeCompare(a.title));
-                break;
-            case 'original':
-            default:
-                sortedPhotos = [...originalPhotos];
-                break;
-        }
-
-//        // Update active button
-//        updateActiveButton(sortBy);
+//    function sortPhotos(sortBy) {
+//        let sortedPhotos = [...originalPhotos];
 //
-//        // Store current sort
-//        currentSort = sortBy;
-
-        // Re-render gallery
-        renderGallery(sortedPhotos);
-    }
+//        switch(sortBy) {
+//            case 'description-asc':
+//                sortedPhotos.sort((a, b) => a.description.localeCompare(b.description));
+//                break;
+//            case 'description-desc':
+//                sortedPhotos.sort((a, b) => b.description.localeCompare(a.description));
+//                break;
+//            case 'title-asc':
+//                sortedPhotos.sort((a, b) => a.title.localeCompare(b.title));
+//                break;
+//            case 'title-desc':
+//                sortedPhotos.sort((a, b) => b.title.localeCompare(a.title));
+//                break;
+//            case 'original':
+//            default:
+//                sortedPhotos = [...originalPhotos];
+//                break;
+//        }
+//
+////        // Update active button
+////        updateActiveButton(sortBy);
+////
+////        // Store current sort
+////        currentSort = sortBy;
+//
+//        // Re-render gallery
+//        renderGallery(sortedPhotos);
+//    }
 
 /*!
 * Start Bootstrap - Personal v1.0.1 (https://startbootstrap.com/template-overviews/personal)
